@@ -199,6 +199,19 @@ def show_top_rebound_player(dream_team_list):
             max_rebounds = player["estadisticas"]["rebotes_totales"]
     return f"El jugador con mayor cantidad de rebotes totales es: {max_rebounds_player_name}"
 
+# 8) Calcular y mostrar el jugador con el mayor porcentaje de tiros de campo.
+
+def show_top_field_goal_player(dream_team_list):
+    flag_top_field_goal_player = False
+    for player in dream_team_list:
+        if flag_top_field_goal_player == False:
+            max_field_goal_player_name = player["nombre"]
+            max_field_goal = player["estadisticas"]["porcentaje_tiros_de_campo"]
+            flag_top_field_goal_player = True
+        elif player["estadisticas"]["porcentaje_tiros_de_campo"] > max_field_goal:
+            max_field_goal_player_name = player["nombre"]
+            max_field_goal = player["estadisticas"]["porcentaje_tiros_de_campo"]
+    return f"El jugador con mayor mayor porcentaje de tiros de campo es: {max_field_goal_player_name}"
 
 def dream_team_app(dream_team_list):
     dream_team_list_duplicate = dream_team_list[:]
@@ -251,6 +264,8 @@ def dream_team_app(dream_team_list):
                     print(show_if_player_belongs_to_basketball_hall_of_fame(dream_team_list_duplicate, input_validation))
             case 7:
                 print(show_top_rebound_player(dream_team_list_duplicate))    
+            case 8:
+                print(show_top_field_goal_player(dream_team_list_duplicate)) 
             case _:
                 print("Ha ingresado una opcion incorrecta")
         clear_console()
