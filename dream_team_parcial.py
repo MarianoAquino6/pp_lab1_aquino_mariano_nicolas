@@ -115,6 +115,29 @@ def save_stadistics_in_csv(dream_team_list, selected_index):
 # campeonatos de la NBA, participaciones en el All-Star y pertenencia al Salón de la
 # Fama del Baloncesto, etc.
 
+def show_every_player(dream_team_list):
+    players_list_names = []
+    for player in dream_team_list:
+        players_list_names.append(player["nombre"])
+    return players_list_names
+
+def validate_input_and_return_fixed_input(dream_team_list):
+    user_choice_player_name = input("Ingrese el nombre del jugador: ")
+    result_alphabetic = re.search("^[a-zA-Z ]+$",user_choice_player_name)
+    if result_alphabetic:
+        fixed_user_choice_player_name = user_choice_player_name.strip().title()
+        if fixed_user_choice_player_name in show_every_player(dream_team_list):
+            for index in range(len(dream_team_list)):
+                if fixed_user_choice_player_name == dream_team_list[index]["nombre"]:
+                    selected_player_index = index
+                    return selected_player_index
+        else:
+            print("El jugador ingresado no pertenece al Dream Team")
+            return -80
+    else:
+        print("Solo ingresar caracteres alfabeticos")
+        return -80
+
 def show_achievements(dream_team_list, selected_player):
     achievements_txt = "\n".join(dream_team_list[selected_player]["logros"])
     achievements_message = f"Logros de {dream_team_list[selected_player]['nombre']}: \n{achievements_txt}"
@@ -150,6 +173,18 @@ def order_players_by_avg_score_by_game_asc(dream_team_list):
 
     return sorted_players_names_txt
 
+# 6) Permitir al usuario ingresar el nombre de un jugador y mostrar si ese jugador es
+# miembro del Salón de la Fama del Baloncesto.
+
+def show_if_player_belongs_to_basketball_hall_of_fame(dream_team_list, selected_player):
+    achievements_string = " ".join(dream_team_list[selected_player]["logros"])
+    result_hall_of_fame = re.search("Fama", achievements_string)
+       
+    if result_hall_of_fame:
+        return f"{dream_team_list[selected_player]['nombre']} pertenece al Basketball Hall of Fame"
+    else:
+        return f"{dream_team_list[selected_player]['nombre']} no pertenece al Basketball Hall of Fame"
+
 
 def dream_team_app(dream_team_list):
     dream_team_list_duplicate = dream_team_list[:]
@@ -184,28 +219,22 @@ def dream_team_app(dream_team_list):
                 else:
                     print("Primero debe seleccionar la opcion 2")
             case 4:
-                players_list_names = []
-                for player in dream_team_list:
-                    players_list_names.append(player["nombre"])
-                players_names_txt = "\n".join(players_list_names)
+                players_names_txt = "\n".join(show_every_player(dream_team_list_duplicate))
                 print(f"Se presentan a continuacion los nombres de los jugadores: \n{players_names_txt}")
-                
-                user_choice_player_name = input("Ingrese el nombre del jugador: ")
-                result_alphabetic = re.search("^[a-zA-Z ]+$",user_choice_player_name)
-                if result_alphabetic:
-                    fixed_user_choice_player_name = user_choice_player_name.strip().title()
-                    if fixed_user_choice_player_name in players_list_names:
-                        for index in range(len(dream_team_list_duplicate)):
-                            if fixed_user_choice_player_name == dream_team_list_duplicate[index]["nombre"]:
-                                selected_player_index = index
-                        print(show_achievements(dream_team_list_duplicate, selected_player_index))
-                    else:
-                        print("El jugador ingresado no pertenece al Dream Team")
-                else:
-                    print("Solo ingresar caracteres alfabeticos")
+
+                input_validation = validate_input_and_return_fixed_input(dream_team_list)
+                if input_validation >= 0:
+                    print(show_achievements(dream_team_list_duplicate, input_validation))
             case 5:
                 print(calculate_and_show_avg_score_by_game(dream_team_list_duplicate))
                 print(f"A continuacion, los jugadores ordenados de acuerdo a su promedio de puntos por partido: \n{order_players_by_avg_score_by_game_asc(dream_team_list_duplicate)}")
+            case 6:
+                players_names_txt = "\n".join(show_every_player(dream_team_list_duplicate))
+                print(f"Se presentan a continuacion los nombres de los jugadores: \n{players_names_txt}")
+
+                input_validation = validate_input_and_return_fixed_input(dream_team_list)
+                if input_validation >= 0:
+                    print(show_if_player_belongs_to_basketball_hall_of_fame(dream_team_list_duplicate, input_validation))
             case _:
                 print("Ha ingresado una opcion incorrecta")
         clear_console()
