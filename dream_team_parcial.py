@@ -315,6 +315,28 @@ def show_above_free_throws_avg_players(dream_team_list, user_input):
         above_avg_players_string = "No hay jugadores que hayan superado dicho promedio"
     return above_avg_players_string
 
+# 16) Calcular y mostrar el promedio de puntos por partido del equipo excluyendo al
+# jugador con la menor cantidad de puntos por partido.
+
+def calculate_and_show_score_by_game_avg_excluding_the_lowest(dream_team_list):
+    flag_lowest_scoring_player = False
+    for player in dream_team_list:
+        if flag_lowest_scoring_player == False:
+            min_scoring_player_name = player["nombre"]
+            min_score = player["estadisticas"]["promedio_puntos_por_partido"]
+            flag_lowest_scoring_player = True
+        elif player["estadisticas"]["promedio_puntos_por_partido"] < min_score:
+            min_scoring_player_name = player["nombre"]
+            min_score = player["estadisticas"]["promedio_puntos_por_partido"]
+    
+    accumulator = 0
+    for player in dream_team_list:
+        if player["nombre"] != min_scoring_player_name:
+            accumulator = accumulator + player["estadisticas"]["promedio_puntos_por_partido"]
+    score_by_game_avg = accumulator / (len(dream_team_list)-1)
+    return score_by_game_avg
+
+
 def dream_team_app(dream_team_list):
     dream_team_list_duplicate = dream_team_list[:]
     flag_enable_csv = False
@@ -356,7 +378,7 @@ def dream_team_app(dream_team_list):
                     print(show_achievements(dream_team_list_duplicate, input_validation))
             case 5:
                 print(calculate_and_show_avg_score_by_game(dream_team_list_duplicate))
-                print(f"A continuacion, los jugadores ordenados de acuerdo a su promedio de puntos por partido: \n{order_players_by_avg_score_by_game_asc(dream_team_list_duplicate)}")
+                print(f"A continuacion, los jugadores ordenados de acuerdo a su promedio de puntos por partido en forma ascendente: \n{order_players_by_avg_score_by_game_asc(dream_team_list_duplicate)}")
             case 6:
                 players_names_txt = "\n".join(show_every_player(dream_team_list_duplicate))
                 print(f"Se presentan a continuacion los nombres de los jugadores: \n{players_names_txt}")
@@ -410,6 +432,8 @@ def dream_team_app(dream_team_list):
                     print(show_above_free_throws_avg_players(dream_team_list_duplicate, user_choice_player_int))
                 else:
                     print("Ha ingresado un valor invalido (Ingresar solo numeros)")
+            case 16:
+                print(calculate_and_show_score_by_game_avg_excluding_the_lowest(dream_team_list_duplicate))
             case _:
                 print("Ha ingresado una opcion incorrecta")
         clear_console()
