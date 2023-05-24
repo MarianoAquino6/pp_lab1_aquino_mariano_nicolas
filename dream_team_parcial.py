@@ -272,6 +272,20 @@ def show_above_assist_by_game_avg_players(dream_team_list, user_input):
         above_avg_players_string = "No hay jugadores que hayan superado dicho promedio"
     return above_avg_players_string
 
+# 13) Calcular y mostrar el jugador con la mayor cantidad de robos totales.
+
+def show_top_steal_player(dream_team_list):
+    flag_top_steal_player = False
+    for player in dream_team_list:
+        if flag_top_steal_player == False:
+            max_steal_player_name = player["nombre"]
+            max_steal = player["estadisticas"]["robos_totales"]
+            flag_top_steal_player = True
+        elif player["estadisticas"]["robos_totales"] > max_steal:
+            max_steal_player_name = player["nombre"]
+            max_steal = player["estadisticas"]["robos_totales"]
+    return f"El jugador con mayor cantidad de robos totales es: {max_steal_player_name}"
+
 def dream_team_app(dream_team_list):
     dream_team_list_duplicate = dream_team_list[:]
     flag_enable_csv = False
@@ -354,6 +368,8 @@ def dream_team_app(dream_team_list):
                     print(show_above_assist_by_game_avg_players(dream_team_list_duplicate, user_choice_player_int))
                 else:
                     print("Ha ingresado un valor invalido (Ingresar solo numeros)")
+            case 13:
+                print(show_top_steal_player(dream_team_list_duplicate))  
             case _:
                 print("Ha ingresado una opcion incorrecta")
         clear_console()
