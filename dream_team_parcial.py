@@ -86,11 +86,30 @@ def show_all_players(dream_team_list):
 # tiros de campo, porcentaje de tiros libres y porcentaje de tiros triples.
 
 def show_player_stadistics(dream_team_list, index_choice):
-    players_stadistics_list = []
-    for key, value in dream_team_list[index_choice]["estadisticas"].items():
-        message = f"{key} - {value}"
-        players_stadistics_list.append(message)
-    return players_stadistics_list
+    players_stadistics_dictionary = dream_team_list[index_choice]["estadisticas"]
+    return players_stadistics_dictionary
+
+# 3) Después de mostrar las estadísticas de un jugador seleccionado por el usuario,
+# permite al usuario guardar las estadísticas de ese jugador en un archivo CSV. El
+# archivo CSV debe contener los siguientes campos: nombre, posición, temporadas,
+# puntos totales, promedio de puntos por partido, rebotes totales, promedio de rebotes
+# por partido, asistencias totales, promedio de asistencias por partido, robos totales,
+# bloqueos totales, porcentaje de tiros de campo, porcentaje de tiros libres y
+# porcentaje de tiros triples.
+
+def save_stadistics_in_csv(dream_team_list, selected_index):
+    with open("parcial_punto_2.csv", "w") as file:
+                file.write("nombre,posicion,temporadas,puntos_totales,promedio_puntos_por_partido,rebotes_totales,promedio_rebotes_por_partido,asistencias_totales,promedio_asistencias_por_partido,robos_totales,bloqueos_totales,porcentaje_tiros_de_campo,porcentaje_tiros_libres,porcentaje_tiros_triples")
+                file.write("\n")
+
+                player_stadistics_exercise_2_dict = show_player_stadistics(dream_team_list, selected_index)
+                player_stadistics_list = []
+                for item in player_stadistics_exercise_2_dict.values():
+                    item_txt = str(item)
+                    player_stadistics_list.append(item_txt)
+                player_stadistics_numbers_string = ",".join(player_stadistics_list)
+                
+                file.write(f"{dream_team_list[selected_index]['nombre']},{dream_team_list[selected_index]['posicion']},{player_stadistics_numbers_string}")
 
 def dream_team_app(dream_team_list):
     dream_team_list_duplicate = dream_team_list[:]
@@ -106,10 +125,17 @@ def dream_team_app(dream_team_list):
                     print (f"Indice: {i} - {show_all_players(dream_team_list_duplicate)[i]}")
                 user_choice_player_txt = input("Ingrese el indice deseado: ")
                 user_choice_player_int = int(user_choice_player_txt)
-                
-                for item in show_player_stadistics(dream_team_list_duplicate, user_choice_player_int):
-                    print(item)
-
+                if user_choice_player_int < 12:
+                    for item, value in show_player_stadistics(dream_team_list_duplicate, user_choice_player_int).items():
+                        print(f"{item}: {value}")
+                    flag_enable_csv = True
+                else:
+                    print("Ha ingresado un indice invalido")
+            case 3:
+                if flag_enable_csv == True:
+                    save_stadistics_in_csv(dream_team_list_duplicate, user_choice_player_int)
+                else:
+                    print("Primero debe seleccionar la opcion 2")
         clear_console()
 
 dream_team_app(leer_archivo(json_path))
