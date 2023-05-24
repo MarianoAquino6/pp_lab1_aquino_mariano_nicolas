@@ -286,6 +286,20 @@ def show_top_steal_player(dream_team_list):
             max_steal = player["estadisticas"]["robos_totales"]
     return f"El jugador con mayor cantidad de robos totales es: {max_steal_player_name}"
 
+# 14) Calcular y mostrar el jugador con la mayor cantidad de bloqueos totales.
+
+def show_top_block_player(dream_team_list):
+    flag_top_block_player = False
+    for player in dream_team_list:
+        if flag_top_block_player == False:
+            max_block_player_name = player["nombre"]
+            max_block = player["estadisticas"]["bloqueos_totales"]
+            flag_top_block_player = True
+        elif player["estadisticas"]["bloqueos_totales"] > max_block:
+            max_block_player_name = player["nombre"]
+            max_block = player["estadisticas"]["bloqueos_totales"]
+    return f"El jugador con mayor cantidad de bloqueos totales es: {max_block_player_name}"
+
 def dream_team_app(dream_team_list):
     dream_team_list_duplicate = dream_team_list[:]
     flag_enable_csv = False
@@ -370,6 +384,8 @@ def dream_team_app(dream_team_list):
                     print("Ha ingresado un valor invalido (Ingresar solo numeros)")
             case 13:
                 print(show_top_steal_player(dream_team_list_duplicate))  
+            case 14:
+                print(show_top_block_player(dream_team_list_duplicate)) 
             case _:
                 print("Ha ingresado una opcion incorrecta")
         clear_console()
