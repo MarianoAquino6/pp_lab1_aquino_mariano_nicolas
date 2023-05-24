@@ -73,10 +73,24 @@ def clear_console() -> None:
 # Michael Jordan - Escolta
 
 def show_all_players(dream_team_list):
-    print("se llamo a la funcion")
+    players_list = []
     for player in dream_team_list:
-        print(f"{player['nombre']} - {player['posicion']}")
-    return
+        message = f"{player['nombre']} - {player['posicion']}"
+        players_list.append(message)
+    return players_list
+
+# 2) Permitir al usuario seleccionar un jugador por su índice y mostrar sus estadísticas
+# completas, incluyendo temporadas jugadas, puntos totales, promedio de puntos por
+# partido, rebotes totales, promedio de rebotes por partido, asistencias totales,
+# promedio de asistencias por partido, robos totales, bloqueos totales, porcentaje de
+# tiros de campo, porcentaje de tiros libres y porcentaje de tiros triples.
+
+def show_player_stadistics(dream_team_list, index_choice):
+    players_stadistics_list = []
+    for key, value in dream_team_list[index_choice]["estadisticas"].items():
+        message = f"{key} - {value}"
+        players_stadistics_list.append(message)
+    return players_stadistics_list
 
 def dream_team_app(dream_team_list):
     dream_team_list_duplicate = dream_team_list[:]
@@ -85,7 +99,17 @@ def dream_team_app(dream_team_list):
         user_choice = menu_principal()
         match(user_choice):
             case 1:
-                show_all_players(dream_team_list_duplicate)
+                for item in show_all_players(dream_team_list_duplicate):
+                    print(item)
+            case 2:
+                for i in range(len(dream_team_list_duplicate)):
+                    print (f"Indice: {i} - {show_all_players(dream_team_list_duplicate)[i]}")
+                user_choice_player_txt = input("Ingrese el indice deseado: ")
+                user_choice_player_int = int(user_choice_player_txt)
+                
+                for item in show_player_stadistics(dream_team_list_duplicate, user_choice_player_int):
+                    print(item)
+
         clear_console()
 
 dream_team_app(leer_archivo(json_path))
