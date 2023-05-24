@@ -185,6 +185,20 @@ def show_if_player_belongs_to_basketball_hall_of_fame(dream_team_list, selected_
     else:
         return f"{dream_team_list[selected_player]['nombre']} no pertenece al Basketball Hall of Fame"
 
+# 7) Calcular y mostrar el jugador con la mayor cantidad de rebotes totales
+
+def show_top_rebound_player(dream_team_list):
+    flag_top_rebound_player = False
+    for player in dream_team_list:
+        if flag_top_rebound_player == False:
+            max_rebounds_player_name = player["nombre"]
+            max_rebounds = player["estadisticas"]["rebotes_totales"]
+            flag_top_rebound_player = True
+        elif player["estadisticas"]["rebotes_totales"] > max_rebounds:
+            max_rebounds_player_name = player["nombre"]
+            max_rebounds = player["estadisticas"]["rebotes_totales"]
+    return f"El jugador con mayor cantidad de rebotes totales es: {max_rebounds_player_name}"
+
 
 def dream_team_app(dream_team_list):
     dream_team_list_duplicate = dream_team_list[:]
@@ -222,7 +236,7 @@ def dream_team_app(dream_team_list):
                 players_names_txt = "\n".join(show_every_player(dream_team_list_duplicate))
                 print(f"Se presentan a continuacion los nombres de los jugadores: \n{players_names_txt}")
 
-                input_validation = validate_input_and_return_fixed_input(dream_team_list)
+                input_validation = validate_input_and_return_fixed_input(dream_team_list_duplicate)
                 if input_validation >= 0:
                     print(show_achievements(dream_team_list_duplicate, input_validation))
             case 5:
@@ -232,9 +246,11 @@ def dream_team_app(dream_team_list):
                 players_names_txt = "\n".join(show_every_player(dream_team_list_duplicate))
                 print(f"Se presentan a continuacion los nombres de los jugadores: \n{players_names_txt}")
 
-                input_validation = validate_input_and_return_fixed_input(dream_team_list)
+                input_validation = validate_input_and_return_fixed_input(dream_team_list_duplicate)
                 if input_validation >= 0:
                     print(show_if_player_belongs_to_basketball_hall_of_fame(dream_team_list_duplicate, input_validation))
+            case 7:
+                print(show_top_rebound_player(dream_team_list_duplicate))
             case _:
                 print("Ha ingresado una opcion incorrecta")
         clear_console()
