@@ -300,6 +300,21 @@ def show_top_block_player(dream_team_list):
             max_block = player["estadisticas"]["bloqueos_totales"]
     return f"El jugador con mayor cantidad de bloqueos totales es: {max_block_player_name}"
 
+# 15) Permitir al usuario ingresar un valor y mostrar los jugadores que hayan tenido un
+# porcentaje de tiros libres superior a ese valor.
+
+def show_above_free_throws_avg_players(dream_team_list, user_input):
+    above_avg_players_list = []
+
+    for player in dream_team_list:
+        if player["estadisticas"]["porcentaje_tiros_libres"] > user_input:
+            above_avg_players_list.append(player["nombre"])
+    if len(above_avg_players_list) > 0:
+        above_avg_players_string = "\n".join(above_avg_players_list)
+    else:
+        above_avg_players_string = "No hay jugadores que hayan superado dicho promedio"
+    return above_avg_players_string
+
 def dream_team_app(dream_team_list):
     dream_team_list_duplicate = dream_team_list[:]
     flag_enable_csv = False
@@ -386,6 +401,15 @@ def dream_team_app(dream_team_list):
                 print(show_top_steal_player(dream_team_list_duplicate))  
             case 14:
                 print(show_top_block_player(dream_team_list_duplicate)) 
+            case 15:
+                user_choice_player_txt = input("Ingrese un valor numerico: ")
+                user_choice_player_txt_stripped = user_choice_player_txt.strip()
+                result = re.match("[0-9]+", user_choice_player_txt_stripped)
+                if result: 
+                    user_choice_player_int = int(user_choice_player_txt)
+                    print(show_above_free_throws_avg_players(dream_team_list_duplicate, user_choice_player_int))
+                else:
+                    print("Ha ingresado un valor invalido (Ingresar solo numeros)")
             case _:
                 print("Ha ingresado una opcion incorrecta")
         clear_console()
