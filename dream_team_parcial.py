@@ -55,7 +55,7 @@ def menu_principal():
         return -1
 
 def leer_archivo(file_adress):
-    with open(file_adress,"r") as lovely_file:
+    with open(file_adress,"r", encoding="utf-8") as lovely_file:
         data = json.load(lovely_file)
         dream_team_list = data["jugadores"]
     return dream_team_list
@@ -68,7 +68,7 @@ def clear_console() -> None:
     _ = input('Press a key to continue...')
     os.system('cls')
 
-# EJERCICIO 1: Mostrar la lista de todos los jugadores del Dream Team. Con el formato:
+# 1) Mostrar la lista de todos los jugadores del Dream Team. Con el formato:
 # Nombre Jugador - Posición. Ejemplo:
 # Michael Jordan - Escolta
 
@@ -111,6 +111,16 @@ def save_stadistics_in_csv(dream_team_list, selected_index):
                 
                 file.write(f"{dream_team_list[selected_index]['nombre']},{dream_team_list[selected_index]['posicion']},{player_stadistics_numbers_string}")
 
+# 4) Permitir al usuario buscar un jugador por su nombre y mostrar sus logros, como
+# campeonatos de la NBA, participaciones en el All-Star y pertenencia al Salón de la
+# Fama del Baloncesto, etc.
+
+def show_achievements(dream_team_list, selected_player):
+    achievements_txt = "\n".join(dream_team_list[selected_player]["logros"])
+    achievements_message = f"Logros de {dream_team_list[selected_player]['nombre']}: \n{achievements_txt}"
+    return achievements_message
+
+
 def dream_team_app(dream_team_list):
     dream_team_list_duplicate = dream_team_list[:]
     flag_enable_csv = False
@@ -123,19 +133,48 @@ def dream_team_app(dream_team_list):
             case 2:
                 for i in range(len(dream_team_list_duplicate)):
                     print (f"Indice: {i} - {show_all_players(dream_team_list_duplicate)[i]}")
+
                 user_choice_player_txt = input("Ingrese el indice deseado: ")
-                user_choice_player_int = int(user_choice_player_txt)
+                user_choice_player_txt_stripped = user_choice_player_txt.strip()
+                result = re.match("[0-9]+", user_choice_player_txt_stripped)
+                if result: 
+                    user_choice_player_int = int(user_choice_player_txt)
+                else:
+                    print("Ha ingresado un indice invalido (Ingresar solo numeros)")
+
                 if user_choice_player_int < 12:
                     for item, value in show_player_stadistics(dream_team_list_duplicate, user_choice_player_int).items():
                         print(f"{item}: {value}")
                     flag_enable_csv = True
                 else:
-                    print("Ha ingresado un indice invalido")
+                    print("Ha ingresado un indice invalido (Superior a la cantidad de los jugadores disponibles)")
             case 3:
                 if flag_enable_csv == True:
                     save_stadistics_in_csv(dream_team_list_duplicate, user_choice_player_int)
                 else:
                     print("Primero debe seleccionar la opcion 2")
+            case 4:
+                players_list_names = []
+                for player in dream_team_list:
+                    players_list_names.append(player["nombre"])
+                players_names_txt = "\n".join(players_list_names)
+                print(f"Se presentan a continuacion los nombres de los jugadores: \n{players_names_txt}")
+                
+                user_choice_player_name = input("Ingrese el nombre del jugador: ")
+                result_alphabetic = re.search("^[a-zA-Z ]+$",user_choice_player_name)
+                if result_alphabetic:
+                    fixed_user_choice_player_name = user_choice_player_name.strip().title()
+                    if fixed_user_choice_player_name in players_list_names:
+                        for index in range(len(dream_team_list_duplicate)):
+                            if fixed_user_choice_player_name == dream_team_list_duplicate[index]["nombre"]:
+                                selected_player_index = index
+                        print(show_achievements(dream_team_list_duplicate, selected_player_index))
+                    else:
+                        print("El jugador ingresado no pertenece al Dream Team")
+                else:
+                    print("Solo ingresar caracteres alfabeticos")
+            case _:
+                print("Ha ingresado una opcion incorrecta")
         clear_console()
 
 dream_team_app(leer_archivo(json_path))
