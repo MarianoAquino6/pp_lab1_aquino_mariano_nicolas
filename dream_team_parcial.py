@@ -242,6 +242,21 @@ def show_above_score_by_game_avg_players(dream_team_list, user_input):
         above_avg_players_string = "No hay jugadores que hayan superado dicho promedio"
     return above_avg_players_string
 
+# 11) Permitir al usuario ingresar un valor y mostrar los jugadores que han promediado
+# más rebotes por partido que ese valor.
+
+def show_above_rebounds_by_game_avg_players(dream_team_list, user_input):
+    above_avg_players_list = []
+
+    for player in dream_team_list:
+        if player["estadisticas"]["promedio_rebotes_por_partido"] > user_input:
+            above_avg_players_list.append(player["nombre"])
+    if len(above_avg_players_list) > 0:
+        above_avg_players_string = "\n".join(above_avg_players_list)
+    else:
+        above_avg_players_string = "No hay jugadores que hayan superado dicho promedio"
+    return above_avg_players_string
+
 def dream_team_app(dream_team_list):
     dream_team_list_duplicate = dream_team_list[:]
     flag_enable_csv = False
@@ -304,6 +319,15 @@ def dream_team_app(dream_team_list):
                 if result: 
                     user_choice_player_int = int(user_choice_player_txt)
                     print(show_above_score_by_game_avg_players(dream_team_list_duplicate, user_choice_player_int))
+                else:
+                    print("Ha ingresado un valor invalido (Ingresar solo numeros)")
+            case 11:
+                user_choice_player_txt = input("Ingrese un valor numerico: ")
+                user_choice_player_txt_stripped = user_choice_player_txt.strip()
+                result = re.match("[0-9]+", user_choice_player_txt_stripped)
+                if result: 
+                    user_choice_player_int = int(user_choice_player_txt)
+                    print(show_above_rebounds_by_game_avg_players(dream_team_list_duplicate, user_choice_player_int))
                 else:
                     print("Ha ingresado un valor invalido (Ingresar solo numeros)")
             case _:
