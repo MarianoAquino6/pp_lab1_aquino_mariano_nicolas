@@ -336,6 +336,21 @@ def calculate_and_show_score_by_game_avg_excluding_the_lowest(dream_team_list):
     score_by_game_avg = accumulator / (len(dream_team_list)-1)
     return score_by_game_avg
 
+# 17) Calcular y mostrar el jugador con la mayor cantidad de logros obtenidos
+
+def calculate_and_show_top_achievement_player(dream_team_list):
+    flag_top_achievement_player = False
+    for player in dream_team_list:
+        if flag_top_achievement_player == False:
+            max_achievement_player_name = player["nombre"]
+            max_achievement = len(player["logros"])
+            flag_top_achievement_player = True
+        elif len(player["logros"]) > max_achievement:
+            max_achievement_player_name = player["nombre"]
+            max_achievement = len(player["logros"])
+
+    return f"El jugador con mayor cantidad de logros obtenidos es: {max_achievement_player_name}"
+
 
 def dream_team_app(dream_team_list):
     dream_team_list_duplicate = dream_team_list[:]
@@ -434,6 +449,8 @@ def dream_team_app(dream_team_list):
                     print("Ha ingresado un valor invalido (Ingresar solo numeros)")
             case 16:
                 print(calculate_and_show_score_by_game_avg_excluding_the_lowest(dream_team_list_duplicate))
+            case 17:
+                print(calculate_and_show_top_achievement_player(dream_team_list_duplicate))
             case _:
                 print("Ha ingresado una opcion incorrecta")
         clear_console()
