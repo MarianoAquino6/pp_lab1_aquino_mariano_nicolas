@@ -211,7 +211,21 @@ def show_top_field_goal_player(dream_team_list):
         elif player["estadisticas"]["porcentaje_tiros_de_campo"] > max_field_goal:
             max_field_goal_player_name = player["nombre"]
             max_field_goal = player["estadisticas"]["porcentaje_tiros_de_campo"]
-    return f"El jugador con mayor mayor porcentaje de tiros de campo es: {max_field_goal_player_name}"
+    return f"El jugador con mayor porcentaje de tiros de campo es: {max_field_goal_player_name}"
+
+# 9) Calcular y mostrar el jugador con la mayor cantidad de asistencias totales.
+
+def show_top_assist_player(dream_team_list):
+    flag_top_assist_player = False
+    for player in dream_team_list:
+        if flag_top_assist_player == False:
+            max_assist_player_name = player["nombre"]
+            max_assist = player["estadisticas"]["asistencias_totales"]
+            flag_top_assist_player = True
+        elif player["estadisticas"]["asistencias_totales"] > max_assist:
+            max_assist_player_name = player["nombre"]
+            max_assist = player["estadisticas"]["asistencias_totales"]
+    return f"El jugador con mayor cantidad de asistencias es: {max_assist_player_name}"
 
 def dream_team_app(dream_team_list):
     dream_team_list_duplicate = dream_team_list[:]
@@ -266,6 +280,8 @@ def dream_team_app(dream_team_list):
                 print(show_top_rebound_player(dream_team_list_duplicate))    
             case 8:
                 print(show_top_field_goal_player(dream_team_list_duplicate)) 
+            case 9:
+                print(show_top_assist_player(dream_team_list_duplicate)) 
             case _:
                 print("Ha ingresado una opcion incorrecta")
         clear_console()
