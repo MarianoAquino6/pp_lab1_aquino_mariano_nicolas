@@ -366,6 +366,21 @@ def show_above_triples_percentage_players(dream_team_list, user_input):
         above_percentage_players_string = "No hay jugadores que hayan superado dicho porcentaje"
     return above_percentage_players_string
 
+# 19) Calcular y mostrar el jugador con la mayor cantidad de temporadas jugadas
+
+def calculate_and_show_player_with_highest_amount_of_seasons(dream_team_list):
+    flag_player_with_highest_amount_of_seasons = False
+    for player in dream_team_list:
+        if flag_player_with_highest_amount_of_seasons == False:
+            max_seasons_player_name = player["nombre"]
+            max_seasons = player["estadisticas"]["temporadas"]
+            flag_player_with_highest_amount_of_seasons = True
+        elif player["estadisticas"]["temporadas"] > max_seasons:
+            max_seasons_player_name = player["nombre"]
+            max_seasons = player["estadisticas"]["temporadas"]
+
+    return f"El jugador con mayor cantidad de temporadas jugadas es: {max_seasons_player_name}"
+
 def dream_team_app(dream_team_list):
     dream_team_list_duplicate = dream_team_list[:]
     flag_enable_csv = False
@@ -474,6 +489,8 @@ def dream_team_app(dream_team_list):
                     print(show_above_triples_percentage_players(dream_team_list_duplicate, user_choice_player_int))
                 else:
                     print("Ha ingresado un valor invalido (Ingresar solo numeros)")
+            case 19:
+                print(calculate_and_show_player_with_highest_amount_of_seasons(dream_team_list_duplicate))
             case _:
                 print("Ha ingresado una opcion incorrecta")
         clear_console()
