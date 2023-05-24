@@ -120,6 +120,36 @@ def show_achievements(dream_team_list, selected_player):
     achievements_message = f"Logros de {dream_team_list[selected_player]['nombre']}: \n{achievements_txt}"
     return achievements_message
 
+# 5) Calcular y mostrar el promedio de puntos por partido de todo el equipo del Dream
+# Team, ordenado por nombre de manera ascendente.
+
+def calculate_and_show_avg_score_by_game(dream_team_list):
+    accumulator = 0
+    for player in dream_team_list:
+        accumulator = accumulator + player["estadisticas"]["promedio_puntos_por_partido"]
+    score_by_game_avg = accumulator / len(dream_team_list)
+
+    return f"El promedio de puntos por partido de todo el equipo junto es de {score_by_game_avg} puntos."
+
+def order_players_by_avg_score_by_game_asc(dream_team_list):
+    dream_team_list_sorted = dream_team_list[:]
+    flag_swap = True
+    while(flag_swap):
+        flag_swap = False
+
+        for index_A in range(len(dream_team_list_sorted) - 1):
+                if dream_team_list_sorted[index_A]["estadisticas"]["promedio_puntos_por_partido"] > dream_team_list_sorted[index_A+1]["estadisticas"]["promedio_puntos_por_partido"]:
+                    dream_team_list_sorted[index_A],dream_team_list_sorted[index_A+1] = dream_team_list_sorted[index_A+1],dream_team_list_sorted[index_A]
+                    flag_swap = True
+    
+    sorted_players_names_list = []
+    for index in range(len(dream_team_list_sorted)):
+        to_save_string = f"{index+1}°. {dream_team_list_sorted[index]['nombre']}"
+        sorted_players_names_list.append(to_save_string)
+    sorted_players_names_txt = "\n".join(sorted_players_names_list)
+
+    return sorted_players_names_txt
+
 
 def dream_team_app(dream_team_list):
     dream_team_list_duplicate = dream_team_list[:]
@@ -173,6 +203,9 @@ def dream_team_app(dream_team_list):
                         print("El jugador ingresado no pertenece al Dream Team")
                 else:
                     print("Solo ingresar caracteres alfabeticos")
+            case 5:
+                print(calculate_and_show_avg_score_by_game(dream_team_list_duplicate))
+                print(f"A continuacion, los jugadores ordenados de acuerdo a su promedio de puntos por partido: \n{order_players_by_avg_score_by_game_asc(dream_team_list_duplicate)}")
             case _:
                 print("Ha ingresado una opcion incorrecta")
         clear_console()
