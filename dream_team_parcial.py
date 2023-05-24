@@ -250,7 +250,7 @@ def dream_team_app(dream_team_list):
                 if input_validation >= 0:
                     print(show_if_player_belongs_to_basketball_hall_of_fame(dream_team_list_duplicate, input_validation))
             case 7:
-                print(show_top_rebound_player(dream_team_list_duplicate))
+                print(show_top_rebound_player(dream_team_list_duplicate))    
             case _:
                 print("Ha ingresado una opcion incorrecta")
         clear_console()
