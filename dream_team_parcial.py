@@ -303,17 +303,17 @@ def show_top_block_player(dream_team_list):
 # 15) Permitir al usuario ingresar un valor y mostrar los jugadores que hayan tenido un
 # porcentaje de tiros libres superior a ese valor.
 
-def show_above_free_throws_avg_players(dream_team_list, user_input):
-    above_avg_players_list = []
+def show_above_free_throws_percentage_players(dream_team_list, user_input):
+    above_percentage_players_list = []
 
     for player in dream_team_list:
         if player["estadisticas"]["porcentaje_tiros_libres"] > user_input:
-            above_avg_players_list.append(player["nombre"])
-    if len(above_avg_players_list) > 0:
-        above_avg_players_string = "\n".join(above_avg_players_list)
+            above_percentage_players_list.append(player["nombre"])
+    if len(above_percentage_players_list) > 0:
+        above_percentage_players_string = "\n".join(above_percentage_players_list)
     else:
-        above_avg_players_string = "No hay jugadores que hayan superado dicho promedio"
-    return above_avg_players_string
+        above_percentage_players_string = "No hay jugadores que hayan superado dicho porcentaje"
+    return above_percentage_players_string
 
 # 16) Calcular y mostrar el promedio de puntos por partido del equipo excluyendo al
 # jugador con la menor cantidad de puntos por partido.
@@ -351,6 +351,20 @@ def calculate_and_show_top_achievement_player(dream_team_list):
 
     return f"El jugador con mayor cantidad de logros obtenidos es: {max_achievement_player_name}"
 
+# 18) Permitir al usuario ingresar un valor y mostrar los jugadores que hayan tenido un
+# porcentaje de tiros triples superior a ese valor.
+
+def show_above_triples_percentage_players(dream_team_list, user_input):
+    above_percentage_players_list = []
+
+    for player in dream_team_list:
+        if player["estadisticas"]["porcentaje_tiros_triples"] > user_input:
+            above_percentage_players_list.append(player["nombre"])
+    if len(above_percentage_players_list) > 0:
+        above_percentage_players_string = "\n".join(above_percentage_players_list)
+    else:
+        above_percentage_players_string = "No hay jugadores que hayan superado dicho porcentaje"
+    return above_percentage_players_string
 
 def dream_team_app(dream_team_list):
     dream_team_list_duplicate = dream_team_list[:]
@@ -444,13 +458,22 @@ def dream_team_app(dream_team_list):
                 result = re.match("[0-9]+", user_choice_player_txt_stripped)
                 if result: 
                     user_choice_player_int = int(user_choice_player_txt)
-                    print(show_above_free_throws_avg_players(dream_team_list_duplicate, user_choice_player_int))
+                    print(show_above_free_throws_percentage_players(dream_team_list_duplicate, user_choice_player_int))
                 else:
                     print("Ha ingresado un valor invalido (Ingresar solo numeros)")
             case 16:
                 print(calculate_and_show_score_by_game_avg_excluding_the_lowest(dream_team_list_duplicate))
             case 17:
                 print(calculate_and_show_top_achievement_player(dream_team_list_duplicate))
+            case 18:
+                user_choice_player_txt = input("Ingrese un valor numerico: ")
+                user_choice_player_txt_stripped = user_choice_player_txt.strip()
+                result = re.match("[0-9]+", user_choice_player_txt_stripped)
+                if result: 
+                    user_choice_player_int = int(user_choice_player_txt)
+                    print(show_above_triples_percentage_players(dream_team_list_duplicate, user_choice_player_int))
+                else:
+                    print("Ha ingresado un valor invalido (Ingresar solo numeros)")
             case _:
                 print("Ha ingresado una opcion incorrecta")
         clear_console()
