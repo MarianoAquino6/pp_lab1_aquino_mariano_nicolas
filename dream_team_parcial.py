@@ -174,7 +174,7 @@ def save_stadistics_in_csv(dream_team_list, selected_index):
     :param selected_index: The index of the player in the dream_team_list whose statistics are to be
     saved in the CSV file
     """
-    with open("parcial_punto_2.csv", "w") as file:
+    with open("parcial_punto_3.csv", "w") as file:
                 file.write("nombre,posicion,temporadas,puntos_totales,promedio_puntos_por_partido,rebotes_totales,promedio_rebotes_por_partido,asistencias_totales,promedio_asistencias_por_partido,robos_totales,bloqueos_totales,porcentaje_tiros_de_campo,porcentaje_tiros_libres,porcentaje_tiros_triples")
                 file.write("\n")
 
