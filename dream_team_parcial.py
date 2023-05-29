@@ -12,68 +12,70 @@ def imprimir_menu():
     """
     menu_dream_team =\
     """
-    ⠀⣶⣶⣶⣶⣶⣶⣶⠀⠀⠀⢰⣶⣶⣶⣶⣶⣶⡆⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣄⠀⠀⠀⠀⠀⢠⣶⣶⣶⣶⣆⠀⠀⠀⠀⠀⠀⠀⠀
-    ⠀⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡄⠀⠀⠀⣾⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀
-    ⠀⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⣸⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀
-    ⠀⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⠁⠀⠀⢿⣿⣿⣿⣿⣿⣿⡇⠀⢠⣿⣿⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀
-    ⠀⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀
-    ⠀⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀
-    ⢠⣭⣭⣭⣭⣭⣭⣥⠀⠀⠀⢠⣭⣭⣭⣭⣭⣭⡄⣭⣭⣭⣭⣭⣭⣭⣭⣭⣭⣭⣭⣥⡄⣬⣭⣭⣭⣭⣭⣭⣭⣭⣭⣭⣭⡄⠀⠀⠀⠀
-    ⢸⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⡇⣀⣀⣀⣀⠀⠀⢹⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⣿⡟⢻⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀
-    ⢸⣿⣿⣿⣿⣿⣿⣿⣄⣀⣀⣼⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⣧⣤⣾⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⣿⠁⠈⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀
-    ⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⠇⠀⠀⠸⣿⣿⣿⣿⣿⣿⡆⠀⠀
-    ⠀⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⣻⣷⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠀⠀⠀⠀⢻⣿⣿⣿⣿⣿⣿⠀⠀
-    ⠀⠀⠈⠻⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠋⠀⠻⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣡⣤⣴⠄⠀⢸⣿⣿⣿⣿⣿⣿⣇⠀
-    ⢀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣈⣠⡀⠀⠀⠠⠁⠘⣿⣿⠀⢠⣾⣿⡄⠀⠀⣀⣀⣁⠀
-    ⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⣶⣤⣤⡾⠻⣶⡾⠛⠛⢧⣤⣾⣿⣿⣿⠀
-    ⢸⣿⠉⣭⢹⣿⠉⢿⡏⢩⣹⡏⠟⣩⡏⣩⣭⣯⠉⣭⡏⣭⠙⣿⠉⢻⡏⣿⣿⠉⣿⣿⣿⣿⠟⢿⡿⠃⠀⣿⣿⣄⡀⢿⣿⣿⣿⣿⣿⠀
-    ⢸⣿⠀⣤⠘⡇⠐⠸⡷⣤⠘⡇⣄⢹⡇⣤⣴⣿⠀⣿⡇⣤⠘⡏⠘⠘⡇⣿⣿⠀⣿⣿⣿⡟⠀⠀⠁⠂⣠⣟⠛⠉⠀⠀⢿⣿⣿⣿⣿⠀
-    ⢸⣿⣦⣤⣾⣶⣿⣷⣷⣤⣾⣷⣿⣦⣧⣤⣤⣿⣶⣿⣧⣤⣶⣷⣿⣶⣷⣤⣼⣦⣤⣼⣿⠁⠀⢀⣴⣾⣿⣿⣷⣤⡀⠀⠘⣿⣿⣿⣿⠀
-    ⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢇⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣶⣄⢹⣿⣿⣿
-
-    Bienvenido al PARCIAL DE MAYO 2023. A continuacion, el menu de opciones:
-    1. Mostrar la lista de todos los jugadores del Dream Team.
-    2. Seleccionar un jugador por su índice y mostrar sus estadísticas completas.
-    3. Guardar las estadísticas del jugador seleccionado en el punto 2 en un archivo ".csv".
-    4. Buscar un jugador por su nombre y mostrar sus logros.
-    5. Obtener promedio de puntos por partido de todo el equipo del Dream Team, ordenado por nombre de manera ascendente.
-    6. Averiguar si el jugador pertenece al Salon de la fama del Baloncesto.
-    7. Obtener el jugador con la mayor cantidad de rebotes totales.
-    8. Obtener el jugador con el mayor porcentaje de tiros de campo.
-    9. Obtener el jugador con la mayor cantidad de asistencias totales.
-    10. Ingresar un valor y obtener los jugadores que han promediado más puntos por partido que ese valor.
-    11. Ingresar un valor y obtener los jugadores que han promediado más rebotes por partido que ese valor.
-    12. Ingresar un valor y obtener los jugadores que han promediado más asistencias por partido que ese valor.
-    13. Obtener el jugador con la mayor cantidad de robos totales.
-    14. Obtener el jugador con la mayor cantidad de bloqueos totales.
-    15. Ingresar un valor y obtener los jugadores que hayan tenido un porcentaje de tiros libres superior a ese valor.
-    16. Obtener el promedio de puntos por partido del equipo excluyendo al jugador con la menor cantidad de puntos por partido.
-    17. Obtener el jugador con la mayor cantidad de logros obtenidos.
-    18. Ingresar un valor y obtener los jugadores que hayan tenido un porcentaje de tiros triples superior a ese valor.
-    19. Obtener el jugador con la mayor cantidad de temporadas jugadas.
-    20. Ingresar un valor y obtener los jugadores , ordenados por posición en la cancha, que hayan tenido un 
-    porcentaje de tiros de campo superior a ese valor.
-    21. Calcular de cada jugador cuál es su posición en cada uno de los siguientes ranking:
-    ● Puntos 
-    ● Rebotes 
-    ● Asistencias 
-    ● Robos
-    Obtener el archivo ".csv" correspondiente.
-    22. (EXTRA) Ingresar un valor y obtener los jugadores que hayan jugado igual o mas cantidad de partidos All-Star que ese valor.
-    23. (EXTRA) Obtener el jugador con mayor cantidad de partidos All-Star jugados
-    24. (EXTRA) Calcular de cada jugador cuál es su posición en cada uno de los siguientes ranking:
-    ● Porcentaje de tiros de campo
-    ● Porcentaje de tiros libres
-    ● Porcentaje de tiros triples
-    Obtener el archivo ".csv" correspondiente.
-    25. (EXTRA) Obtener la cantidad de jugadores cuya posicion es Ala-Pivot
-    26. (EXTRA) Obtener nombres de aquellos jugadores cuya posicion sea Ala-Pivot
-    27. (EXTRA) Obtener nombres de aquellos jugadores cuya posicion sea Base
-    28. (JUEGO EXTRA): Se le hará una pregunta sobre las estadisticas obtenidas a lo largo del menu 
-    y usted deberá contestarla, para luego comprobar si su respuesta es correcta o incorrecta.
-    29. (EXTRA) Si ha respondido 2 o mas preguntas correctamente en el juego de la opción 28, podrá acceder a un certificado ".txt".
-    30. SALIR
-    _________________________________________________________________________________________________________________
+______________________________________________________________________________________________________________________________________
+|    ⠀⣶⣶⣶⣶⣶⣶⣶⠀⠀⠀⢰⣶⣶⣶⣶⣶⣶⡆⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣄⠀⠀⠀⠀⠀⢠⣶⣶⣶⣶⣆⠀⠀⠀⠀⠀⠀⠀⠀                                                                               |
+|    ⠀⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡄⠀⠀⠀⣾⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀                                                                               |
+|    ⠀⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⣸⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀                                                                               |
+|    ⠀⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⠁⠀⠀⢿⣿⣿⣿⣿⣿⣿⡇⠀⢠⣿⣿⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀                                                                               |
+|    ⠀⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀                                                                               |
+|    ⠀⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀                                                                               |
+|    ⢠⣭⣭⣭⣭⣭⣭⣥⠀⠀⠀⢠⣭⣭⣭⣭⣭⣭⡄⣭⣭⣭⣭⣭⣭⣭⣭⣭⣭⣭⣭⣥⡄⣬⣭⣭⣭⣭⣭⣭⣭⣭⣭⣭⣭⡄⠀⠀⠀⠀                                                                               |
+|    ⢸⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⡇⣀⣀⣀⣀⠀⠀⢹⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⣿⡟⢻⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀                                                                               |
+|    ⢸⣿⣿⣿⣿⣿⣿⣿⣄⣀⣀⣼⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⣧⣤⣾⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⣿⠁⠈⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀                                                                               |
+|    ⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⠇⠀⠀⠸⣿⣿⣿⣿⣿⣿⡆⠀⠀                                                                               |
+|    ⠀⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⣻⣷⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠀⠀⠀⠀⢻⣿⣿⣿⣿⣿⣿⠀⠀                                                                               |
+|    ⠀⠀⠈⠻⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠋⠀⠻⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣡⣤⣴⠄⠀⢸⣿⣿⣿⣿⣿⣿⣇⠀                                                                               |
+|    ⢀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣈⣠⡀⠀⠀⠠⠁⠘⣿⣿⠀⢠⣾⣿⡄⠀⠀⣀⣀⣁⠀                                                                               |
+|    ⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⣶⣤⣤⡾⠻⣶⡾⠛⠛⢧⣤⣾⣿⣿⣿⠀                                                                               |
+|    ⢸⣿⠉⣭⢹⣿⠉⢿⡏⢩⣹⡏⠟⣩⡏⣩⣭⣯⠉⣭⡏⣭⠙⣿⠉⢻⡏⣿⣿⠉⣿⣿⣿⣿⠟⢿⡿⠃⠀⣿⣿⣄⡀⢿⣿⣿⣿⣿⣿⠀                                                                               |
+|    ⢸⣿⠀⣤⠘⡇⠐⠸⡷⣤⠘⡇⣄⢹⡇⣤⣴⣿⠀⣿⡇⣤⠘⡏⠘⠘⡇⣿⣿⠀⣿⣿⣿⡟⠀⠀⠁⠂⣠⣟⠛⠉⠀⠀⢿⣿⣿⣿⣿⠀                                                                               |
+|    ⢸⣿⣦⣤⣾⣶⣿⣷⣷⣤⣾⣷⣿⣦⣧⣤⣤⣿⣶⣿⣧⣤⣶⣷⣿⣶⣷⣤⣼⣦⣤⣼⣿⠁⠀⢀⣴⣾⣿⣿⣷⣤⡀⠀⠘⣿⣿⣿⣿⠀                                                                               |
+|    ⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢇⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣶⣄⢹⣿⣿⣿                                                                                |
+|_____________________________________________________________________________________________________________________________________|
+|                                                                                                                                     |
+|    Bienvenido al PARCIAL DE MAYO 2023. A continuacion, el menu de opciones:                                                         |
+|    1. Mostrar la lista de todos los jugadores del Dream Team.                                                                       |
+|    2. Seleccionar un jugador por su índice y mostrar sus estadísticas completas.                                                    |
+|    3. Guardar las estadísticas del jugador seleccionado en el punto 2 en un archivo ".csv".                                         |
+|    4. Buscar un jugador por su nombre y mostrar sus logros.                                                                         |
+|    5. Obtener promedio de puntos por partido de todo el equipo del Dream Team, ordenado por nombre de manera ascendente.            |
+|    6. Averiguar si el jugador pertenece al Salon de la fama del Baloncesto.                                                         |
+|    7. Obtener el jugador con la mayor cantidad de rebotes totales.                                                                  |
+|    8. Obtener el jugador con el mayor porcentaje de tiros de campo.                                                                 |
+|    9. Obtener el jugador con la mayor cantidad de asistencias totales.                                                              |
+|    10. Ingresar un valor y obtener los jugadores que han promediado más puntos por partido que ese valor.                           |
+|    11. Ingresar un valor y obtener los jugadores que han promediado más rebotes por partido que ese valor.                          |
+|    12. Ingresar un valor y obtener los jugadores que han promediado más asistencias por partido que ese valor.                      |
+|    13. Obtener el jugador con la mayor cantidad de robos totales.                                                                   |
+|    14. Obtener el jugador con la mayor cantidad de bloqueos totales.                                                                |
+|    15. Ingresar un valor y obtener los jugadores que hayan tenido un porcentaje de tiros libres superior a ese valor.               |
+|    16. Obtener el promedio de puntos por partido del equipo excluyendo al jugador con la menor cantidad de puntos por partido.      |
+|    17. Obtener el jugador con la mayor cantidad de logros obtenidos.                                                                |
+|    18. Ingresar un valor y obtener los jugadores que hayan tenido un porcentaje de tiros triples superior a ese valor.              |
+|    19. Obtener el jugador con la mayor cantidad de temporadas jugadas.                                                              |
+|    20. Ingresar un valor y obtener los jugadores , ordenados por posición en la cancha, que hayan tenido un                         |
+|    porcentaje de tiros de campo superior a ese valor.                                                                               |
+|    21. Calcular de cada jugador cuál es su posición en cada uno de los siguientes ranking:                                          |
+|    ● Puntos                                                                                                                         |
+|    ● Rebotes                                                                                                                        |
+|    ● Asistencias                                                                                                                    |
+|    ● Robos                                                                                                                          |
+|    Obtener el archivo ".csv" correspondiente.                                                                                       |
+|    22. (EXTRA) Ingresar un valor y obtener los jugadores que hayan jugado igual o mas cantidad de partidos All-Star que ese valor.  |
+|    23. (EXTRA) Obtener el jugador con mayor cantidad de partidos All-Star jugados                                                   |
+|    24. (EXTRA) Calcular de cada jugador cuál es su posición en cada uno de los siguientes ranking:                                  |
+|    ● Porcentaje de tiros de campo                                                                                                   |
+|    ● Porcentaje de tiros libres                                                                                                     |
+|    ● Porcentaje de tiros triples                                                                                                    |
+|    Obtener el archivo ".csv" correspondiente.                                                                                       |
+|    25. (EXTRA) Obtener la cantidad de jugadores cuya posicion es Ala-Pivot                                                          |
+|    26. (EXTRA) Obtener nombres de aquellos jugadores cuya posicion sea Ala-Pivot                                                    |
+|    27. (EXTRA) Obtener nombres de aquellos jugadores cuya posicion sea Base                                                         |
+|    28. (JUEGO EXTRA): Se le hará una pregunta sobre las estadisticas obtenidas a lo largo del menu                                  |
+|    y usted deberá contestarla, para luego comprobar si su respuesta es correcta o incorrecta.                                       |
+|    29. (EXTRA) Si ha respondido 2 o mas preguntas correctamente en el juego de la opción 28, podrá acceder a un certificado ".txt". |
+|    30. SALIR                                                                                                                        |
+|_____________________________________________________________________________________________________________________________________|
     """
     print(menu_dream_team)
 
