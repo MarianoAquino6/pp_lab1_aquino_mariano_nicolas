@@ -180,13 +180,17 @@ def save_stadistics_in_csv(dream_team_list, selected_index):
                 file.write("nombre,posicion,temporadas,puntos_totales,promedio_puntos_por_partido,rebotes_totales,promedio_rebotes_por_partido,asistencias_totales,promedio_asistencias_por_partido,robos_totales,bloqueos_totales,porcentaje_tiros_de_campo,porcentaje_tiros_libres,porcentaje_tiros_triples")
                 file.write("\n")
 
+                #Obtaining the player's stadistics
                 player_stadistics_exercise_2_dict = show_player_stadistics(dream_team_list, selected_index)
+                
+                #Iterating the obtained dictionary in order to create a string with all values
                 player_stadistics_list = []
                 for item in player_stadistics_exercise_2_dict.values():
                     item_txt = str(item)
                     player_stadistics_list.append(item_txt)
                 player_stadistics_numbers_string = ",".join(player_stadistics_list)
                 
+                #Write on csv document
                 file.write(f"{dream_team_list[selected_index]['nombre']},{dream_team_list[selected_index]['posicion']},{player_stadistics_numbers_string}")
 
 # 4) Permitir al usuario buscar un jugador por su nombre y mostrar sus logros, como
@@ -292,6 +296,7 @@ def order_players_by_avg_score_by_game_asc(dream_team_list):
                     dream_team_list_sorted[index_A],dream_team_list_sorted[index_A+1] = dream_team_list_sorted[index_A+1],dream_team_list_sorted[index_A]
                     flag_swap = True
     
+    #Iterate players's index and add it to a message showing position and name, then saving it to a list
     sorted_players_names_list = []
     for index in range(len(dream_team_list_sorted)):
         to_save_string = f"{index+1}°. {dream_team_list_sorted[index]['nombre']}"
@@ -318,7 +323,9 @@ def show_if_player_belongs_to_basketball_hall_of_fame(dream_team_list, selected_
     (belongs to the Basketball Hall of Fame) or "no pertenece al Basketball Hall of Fame" (does not
     belong to the Basketball Hall of Fame).
     """
+    #Transform items to one big string
     achievements_string = " ".join(dream_team_list[selected_player]["logros"])
+    #Then search if it has the word "Fame" in it.
     result_hall_of_fame = re.search("Fama", achievements_string)
        
     if result_hall_of_fame:
@@ -418,10 +425,14 @@ def show_above_score_by_game_avg_players(dream_team_list, user_input):
     """
     above_avg_players_list = []
 
+    #Iterate list and find out those players that have greater values than user's input
     for player in dream_team_list:
         if player["estadisticas"]["promedio_puntos_por_partido"] > user_input:
             above_avg_players_list.append(player["nombre"])
+    
+    #Check if there's any player that satisfies the condition
     if len(above_avg_players_list) > 0:
+        #Create string from players
         above_avg_players_string = "\n".join(above_avg_players_list)
     else:
         above_avg_players_string = "No hay jugadores que hayan superado dicho promedio"
@@ -445,10 +456,14 @@ def show_above_rebounds_by_game_avg_players(dream_team_list, user_input):
     """
     above_avg_players_list = []
 
+    #Iterate list and find out those players that have greater values than user's input
     for player in dream_team_list:
         if player["estadisticas"]["promedio_rebotes_por_partido"] > user_input:
             above_avg_players_list.append(player["nombre"])
+    
+    #Check if there's any player that satisfies the condition
     if len(above_avg_players_list) > 0:
+        #Create string from players
         above_avg_players_string = "\n".join(above_avg_players_list)
     else:
         above_avg_players_string = "No hay jugadores que hayan superado dicho promedio"
@@ -472,10 +487,14 @@ def show_above_assist_by_game_avg_players(dream_team_list, user_input):
     """
     above_avg_players_list = []
 
+    #Iterate list and find out those players that have greater values than user's input
     for player in dream_team_list:
         if player["estadisticas"]["promedio_asistencias_por_partido"] > user_input:
             above_avg_players_list.append(player["nombre"])
+    
+    #Check if there's any player that satisfies the condition
     if len(above_avg_players_list) > 0:
+        #Create string from players
         above_avg_players_string = "\n".join(above_avg_players_list)
     else:
         above_avg_players_string = "No hay jugadores que hayan superado dicho promedio"
@@ -547,10 +566,14 @@ def show_above_free_throws_percentage_players(dream_team_list, user_input):
     """
     above_percentage_players_list = []
 
+    #Iterate list and find out those players that have greater values than user's input
     for player in dream_team_list:
         if player["estadisticas"]["porcentaje_tiros_libres"] > user_input:
             above_percentage_players_list.append(player["nombre"])
+    
+    #Check if there's any player that satisfies the condition
     if len(above_percentage_players_list) > 0:
+        #Create string from players
         above_percentage_players_string = "\n".join(above_percentage_players_list)
     else:
         above_percentage_players_string = "No hay jugadores que hayan superado dicho porcentaje"
@@ -568,6 +591,8 @@ def calculate_and_show_score_by_game_avg_excluding_the_lowest(dream_team_list):
     team and contains the following keys:
     :return: the average score per game of the dream team, excluding the lowest scoring player.
     """
+
+    #Get lowest scoring player's name
     flag_lowest_scoring_player = False
     for player in dream_team_list:
         if flag_lowest_scoring_player == False:
@@ -578,10 +603,13 @@ def calculate_and_show_score_by_game_avg_excluding_the_lowest(dream_team_list):
             min_scoring_player_name = player["nombre"]
             min_score = player["estadisticas"]["promedio_puntos_por_partido"]
     
+    #Iterate list and add player's score avg except when he's the lowest scoring player
     accumulator = 0
     for player in dream_team_list:
         if player["nombre"] != min_scoring_player_name:
             accumulator = accumulator + player["estadisticas"]["promedio_puntos_por_partido"]
+    
+    #Calculating avg using len-1 because of the player i excluded
     score_by_game_avg = accumulator / (len(dream_team_list)-1)
     return score_by_game_avg
 
@@ -628,10 +656,14 @@ def show_above_triples_percentage_players(dream_team_list, user_input):
     """
     above_percentage_players_list = []
 
+    #Iterate list and find out those players that have greater values than user's input
     for player in dream_team_list:
         if player["estadisticas"]["porcentaje_tiros_triples"] > user_input:
             above_percentage_players_list.append(player["nombre"])
+    
+    #Check if there's any player that satisfies the condition
     if len(above_percentage_players_list) > 0:
+        #Create string from players
         above_percentage_players_string = "\n".join(above_percentage_players_list)
     else:
         above_percentage_players_string = "No hay jugadores que hayan superado dicho porcentaje"
@@ -681,6 +713,8 @@ def calculate_and_show_sorted_players_above_user_input_field_goal_percentage(dre
     with a field goal percentage above the user input, the function returns a string indicating that
     there are no such players.
     """
+    
+    #Sorting players by positions
     flag_swap = True
     while(flag_swap):
         flag_swap = False
@@ -690,12 +724,15 @@ def calculate_and_show_sorted_players_above_user_input_field_goal_percentage(dre
                     dream_team_list[index_A],dream_team_list[index_A+1] = dream_team_list[index_A+1],dream_team_list[index_A]
                     flag_swap = True
 
+    #Iterating sorted list and checking if their triples are greater than user's input
     above_input_sorted_players = []
     for player in dream_team_list:
         if player["estadisticas"]["porcentaje_tiros_triples"] > user_input:
             above_input_sorted_players.append(f"{player['nombre']} - {player['posicion']}")
 
+    #Checking if there are players that indeed are greater than user's input
     if len(above_input_sorted_players) > 0:
+        #If they are then show them
         above_percentage_players_string = "\n".join(above_input_sorted_players)
         return above_percentage_players_string
     else:
@@ -725,6 +762,7 @@ def rank_players(dream_team_list):
     each dictionary contains the player's name and their statistics for points, rebounds, assists, and
     steals
     """
+    #Sorting by total score
     sorted_by_total_score = dream_team_list[:]
     flag_swap_total_score = True
     while flag_swap_total_score:
@@ -735,6 +773,7 @@ def rank_players(dream_team_list):
                     sorted_by_total_score[index_A],sorted_by_total_score[index_A+1] = sorted_by_total_score[index_A+1],sorted_by_total_score[index_A]
                     flag_swap_total_score = True
 
+    #Sorting by total rebounds
     sorted_by_total_rebounds = dream_team_list[:]
     flag_swap_total_rebounds = True
     while flag_swap_total_rebounds:
@@ -745,6 +784,7 @@ def rank_players(dream_team_list):
                     sorted_by_total_rebounds[index_A],sorted_by_total_rebounds[index_A+1] = sorted_by_total_rebounds[index_A+1],sorted_by_total_rebounds[index_A]
                     flag_swap_total_rebounds = True
 
+    #Sorting by total assists
     sorted_by_total_assists = dream_team_list[:]
     flag_swap_total_assists = True
     while flag_swap_total_assists:
@@ -755,6 +795,7 @@ def rank_players(dream_team_list):
                     sorted_by_total_assists[index_A],sorted_by_total_assists[index_A+1] = sorted_by_total_assists[index_A+1],sorted_by_total_assists[index_A]
                     flag_swap_total_assists = True
 
+    #Sorting by total steals
     sorted_by_total_steals = dream_team_list[:]
     flag_swap_total_steals = True
     while flag_swap_total_steals:
@@ -765,11 +806,13 @@ def rank_players(dream_team_list):
                     sorted_by_total_steals[index_A],sorted_by_total_steals[index_A+1] = sorted_by_total_steals[index_A+1],sorted_by_total_steals[index_A]
                     flag_swap_total_steals = True
 
+    #Iterating players in original list, then checking what position they have on each "sorted by" list using their indexes
     with open("parcial_punto_21.csv", "w") as file:
         file.write("Jugador,Puntos,Rebotes,Asistencias,Robos")
         file.write("\n")
         for player_original in dream_team_list:
             for index in range(len(sorted_by_total_score)):
+                #If actual player's name matches the "sorted by" player's name then save the index and write it on file
                 if player_original["nombre"] == sorted_by_total_score[index]["nombre"]:
                     total_score_rank = index
             for index in range(len(sorted_by_total_rebounds)):
@@ -781,6 +824,7 @@ def rank_players(dream_team_list):
             for index in range(len(sorted_by_total_steals)):
                 if player_original["nombre"] == sorted_by_total_steals[index]["nombre"]:
                     total_steals_rank = index
+            #Using "+1" to show the actual positions
             file.write(f"{player_original['nombre']},{total_score_rank+1},{total_rebounds_rank+1},{total_assists_rank+1},{total_steals_rank+1}\n")
 
 # 22) BONUS- Encontrar y mostrar aquellos jugadores que hayan jugado igual mas cantidad de partidos All-Star 
@@ -802,20 +846,25 @@ def calculate_and_show_above_input_value_all_star_players(dream_team_list, user_
     """
     all_star_players = []
 
+    #Iterating on every player achievements, then looking for the word "All-Star" in them.
     for player in dream_team_list:
         for achievement in player["logros"]:
             result_all_star = re.search("All-Star", achievement)
             if result_all_star:
+                #If the player indeed played All-Star, then look for the numeric amount of games played. 
                 amount_of_all_star_played = re.search("^[0-9]+", achievement)
+                #Puting player's name and amount of All-Star games in the list
                 all_star_players.append({player["nombre"]:int(amount_of_all_star_played.group())})
     
     above_user_input_all_star_players_list = []
     
+    #Iterating the dictionary looking for players that played a higher amount of games than user's input
     for item in all_star_players:
         for key, value in item.items():
             if value >= user_input:
                 above_user_input_all_star_players_list.append(key)
     
+    #Checking if there's any player that actually satisfies the condition
     if len(above_user_input_all_star_players_list) > 0:
         above_input_all_star_players_string = "\n".join(above_user_input_all_star_players_list)
         return above_input_all_star_players_string
@@ -839,13 +888,17 @@ def find_and_show_player_with_highest_amount_of_all_star_games(dream_team_list):
     """
     all_star_players = []
 
+    #Iterating on every player achievements, then looking for the word "All-Star" in them.
     for player in dream_team_list:
         for achievement in player["logros"]:
             result_all_star = re.search("All-Star", achievement)
             if result_all_star:
+                #If the player indeed played All-Star, then look for the numeric amount of games played. 
                 amount_of_all_star_played = re.search("^[0-9]+", achievement)
+                #Puting player's name and amount of All-Star games in the list
                 all_star_players.append({player["nombre"]:int(amount_of_all_star_played.group())})
     
+    #Then simply finding the max
     flag_top_all_star_player = True
     for item in all_star_players:
         for key, value in item.items():
@@ -997,19 +1050,26 @@ def show_players_offer_input_validate_input_and_check_if_input_if_correct_or_not
     :return: a string indicating whether the user input was correct ("Bien"), incorrect ("Mal"), or
     invalid ("Error").
     """
+    #Show players
     players_names_txt = "\n".join(show_every_player(dream_team_list))
     print(f"Se presentan a continuacion los nombres de los jugadores: \n\n{players_names_txt}\n")
 
+    #Validate user's input
     user_choice_player_name = input("Ingrese el nombre del jugador: ")
     result_alphabetic = re.search("^[a-zA-Z ]+$",user_choice_player_name)
     if result_alphabetic:
         fixed_user_choice_player_name = user_choice_player_name.strip().title()
+        #Checking if player is in player's list
         if fixed_user_choice_player_name in show_every_player(dream_team_list):
+            #Get player's name out of function's return
             result_player_name = re.search("es: ([a-zA-Z ]+)$", to_call_function)
+            #Check if answer is correct or not comparing user's input to actual return
             if fixed_user_choice_player_name == result_player_name.group(1): #Para obtener la expresion capturada
+                #Correct answer
                 print("Excelente! Respuesta correcta")
                 return "Bien"
             else:
+                #Wrong answer
                 print(f"Respuesta incorrecta. La respuesta correcta es {result_player_name.group(1)}")
                 return "Mal"
         else:
@@ -1032,14 +1092,19 @@ def play_basketball_stadistics_game(dream_team_list):
     counter = 0
     flag_exit = False
     list_of_questions_numbers = [7, 8, 9, 13, 14, 17, 19]
+
+    #Ask questions iterating across a list of numbers related to questions
     for question_number in list_of_questions_numbers:
         match (question_number):
             case 7:
                 while True:
                     print("Cual es el jugador con mayor cantidad de rebotes totales?")
+                    #Show players, offer input, validate it, then get answer
                     rebound_answer_output = show_players_offer_input_validate_input_and_check_if_input_if_correct_or_not(dream_team_list, show_top_rebound_player(dream_team_list))
+                    #Validate answer
                     if rebound_answer_output != "Error":
                         if rebound_answer_output == "Bien":
+                            #Count amount of correct answers
                             counter = counter + 1
                         break
                     else:
@@ -1104,20 +1169,27 @@ def play_basketball_stadistics_game(dream_team_list):
                         break
                     else:
                         clear_console()
+
+        #Show amount of correct answers
         print(f"\nCantidad de respuestas correctas hasta el momento: {counter}\n  ")
         
+        #Ask to continue or quit the game
         while True:
             user_choice_play_game = input("Si desea seguir jugando escriba 'SI', de lo contrario escriba 'NO': ") 
             if user_choice_play_game == "NO":
+                #If he wants to quit, then turn flag exit to "True"
                 flag_exit = True
                 break
             if user_choice_play_game == "SI":
                 break
             else:
                 print("Debe escribir SI o NO. Respete mayusculas")
-
+        
+        #If user wants to quit, then break
         if flag_exit == True:
             break
+
+        #Clear console after every round
         os.system('cls')
     return counter
 
@@ -1135,8 +1207,10 @@ def check_amount_of_right_answers(amount_of_correct_answers):
     if amount_of_correct_answers >= 2:
         with open("NBA_certificate.txt", "w") as file:
             file.write(f"Felicitaciones. Ha obtenido el certificado de NBA debido a su cantidad de respuestas correctas \nCantidad de respuestas correctas: {amount_of_correct_answers} \n\nGracias por participar del juego \n-NBA")
+            return True
     else:
         print("No ha obtenido la cantidad necesaria de respuestas correctas para obtener el certificado. Por favor siga intentandolo")
+        return False
 
 #------------------------------------------------APP---------------------------------------------------------------
 
@@ -1158,9 +1232,11 @@ def dream_team_app(dream_team_list):
                 for item in show_all_players(dream_team_list_duplicate):
                     print(item)
             case 2:
+                #Show the index list to the user
                 for i in range(len(dream_team_list_duplicate)):
                     print (f"Indice: {i} - {show_all_players(dream_team_list_duplicate)[i]}")
-
+                
+                #Offer the user a choice, then validate it
                 user_choice_player_txt = input("Ingrese el indice deseado: ")
                 user_choice_player_txt_stripped = user_choice_player_txt.strip()
                 result = re.match("[0-9]+$", user_choice_player_txt_stripped)
@@ -1180,19 +1256,26 @@ def dream_team_app(dream_team_list):
                 else:
                     print("Primero debe seleccionar la opcion 2")
             case 4:
+                #Showing players's name to the user
                 players_names_txt = "\n".join(show_every_player(dream_team_list_duplicate))
                 print(f"Se presentan a continuacion los nombres de los jugadores: \n{players_names_txt}")
 
+                #Getting player's index according to the user's choice
                 input_validation = validate_input_and_return_player_index(dream_team_list_duplicate)
+                #Show achievements according to user's choice
                 if input_validation >= 0:
                     print(show_achievements(dream_team_list_duplicate, input_validation))
             case 5:
+                #Show score avg per game
                 print(calculate_and_show_avg_score_by_game(dream_team_list_duplicate))
+                #Show players sorted by avg score per game
                 print(f"A continuacion, los jugadores ordenados de acuerdo a su promedio de puntos por partido en forma ascendente: \n{order_players_by_avg_score_by_game_asc(dream_team_list_duplicate)}")
             case 6:
+                #Showing every player
                 players_names_txt = "\n".join(show_every_player(dream_team_list_duplicate))
                 print(f"Se presentan a continuacion los nombres de los jugadores: \n{players_names_txt}")
 
+                #Using function to validate input and get player's index
                 input_validation = validate_input_and_return_player_index(dream_team_list_duplicate)
                 if input_validation >= 0:
                     print(show_if_player_belongs_to_basketball_hall_of_fame(dream_team_list_duplicate, input_validation))
@@ -1204,6 +1287,8 @@ def dream_team_app(dream_team_list):
                 print(show_top_assist_player(dream_team_list_duplicate)) 
             case 10:
                 user_choice_player_txt = input("Ingrese un valor numerico: ")
+
+                #Validate user's input
                 user_choice_player_txt_stripped = user_choice_player_txt.strip()
                 result = re.match("[0-9]+$", user_choice_player_txt_stripped)
                 if result: 
@@ -1213,6 +1298,8 @@ def dream_team_app(dream_team_list):
                     print("Ha ingresado un valor invalido (Ingresar solo numeros)")
             case 11:
                 user_choice_player_txt = input("Ingrese un valor numerico: ")
+
+                #Validate user's input
                 user_choice_player_txt_stripped = user_choice_player_txt.strip()
                 result = re.match("[0-9]+$", user_choice_player_txt_stripped)
                 if result: 
@@ -1222,6 +1309,8 @@ def dream_team_app(dream_team_list):
                     print("Ha ingresado un valor invalido (Ingresar solo numeros)")
             case 12:
                 user_choice_player_txt = input("Ingrese un valor numerico: ")
+
+                #Validate user's input
                 user_choice_player_txt_stripped = user_choice_player_txt.strip()
                 result = re.match("[0-9]+$", user_choice_player_txt_stripped)
                 if result: 
@@ -1235,6 +1324,8 @@ def dream_team_app(dream_team_list):
                 print(show_top_block_player(dream_team_list_duplicate)) 
             case 15:
                 user_choice_player_txt = input("Ingrese un valor numerico: ")
+
+                #Validate user's input
                 user_choice_player_txt_stripped = user_choice_player_txt.strip()
                 result = re.match("[0-9]+$", user_choice_player_txt_stripped)
                 if result: 
@@ -1248,6 +1339,8 @@ def dream_team_app(dream_team_list):
                 print(calculate_and_show_top_achievement_player(dream_team_list_duplicate))
             case 18:
                 user_choice_player_txt = input("Ingrese un valor numerico: ")
+
+                #Validate user's input
                 user_choice_player_txt_stripped = user_choice_player_txt.strip()
                 result = re.match("[0-9]+$", user_choice_player_txt_stripped)
                 if result: 
@@ -1289,9 +1382,11 @@ def dream_team_app(dream_team_list):
                 print(find_and_show_every_base_player(dream_team_list_duplicate))
             case 28:
                 amount_of_correct_answers = play_basketball_stadistics_game(dream_team_list_duplicate)
+                #Enable an oportunity to get the certificate
                 flag_enable_certificate = True
             case 29:
-                if flag_enable_certificate == True:
+                #Checking if user played the game and answered 2 or more right questions
+                if flag_enable_certificate == True and check_amount_of_right_answers(amount_of_correct_answers) == True:
                     print("Creando certificado. (10%)", end="")
                     time.sleep(0.4)
                     print("\rCreando certificado.. (30%)", end="") #Muevo el cursor al inicio de la linea actual
@@ -1306,7 +1401,6 @@ def dream_team_app(dream_team_list):
                     time.sleep(0.4)
                     print("\rCreando certificado..... (100%)", end="")
                     time.sleep(0.4)
-                    check_amount_of_right_answers(amount_of_correct_answers)
                     print("\nSe ha creado el certificado!")
                 else:
                     print("Para obtener el certificado primero debe elegir la opcion 28 y responder 2 o mas preguntas correctamente")
