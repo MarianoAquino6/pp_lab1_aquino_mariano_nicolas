@@ -74,7 +74,11 @@ ________________________________________________________________________________
 |    28. (JUEGO EXTRA): Se le hará una pregunta sobre las estadisticas obtenidas a lo largo del menu                                  |
 |    y usted deberá contestarla, para luego comprobar si su respuesta es correcta o incorrecta.                                       |
 |    29. (EXTRA) Si ha respondido 2 o mas preguntas correctamente en el juego de la opción 28, podrá acceder a un certificado ".txt". |
-|    30. SALIR                                                                                                                        |
+|    30. Obtener cantidad de jugadores por posicion                                                                                   |
+|    31. Obtener la lista de jugadores ordenadas por la cantidad de All-Star de forma descendente.                                    |
+|    32. Obtener los jugadores con las mejores estadísticas en cada valor                                                             |
+|    33. Obtener el jugador que tiene las mejores estadísticas de todos                                                               |
+|    34. SALIR                                                                                                                        |
 |_____________________________________________________________________________________________________________________________________|
     """
     print(menu_dream_team)
@@ -88,7 +92,7 @@ def menu_principal():
     """
     imprimir_menu()
     user_input_str = input("Ingrese su opcion: ")
-    result = re.search("^([1-9]|0[1-9]|[1-2][0-9]|30)$", user_input_str)
+    result = re.search("^([1-9]|0[1-9]|[1-2][0-9]|3[0-4])$", user_input_str)
     if result:
         return int(user_input_str)
     else:
@@ -192,6 +196,9 @@ def save_stadistics_in_csv(dream_team_list, selected_index):
                 
                 #Write on csv document
                 file.write(f"{dream_team_list[selected_index]['nombre']},{dream_team_list[selected_index]['posicion']},{player_stadistics_numbers_string}")
+
+    if os.path.isfile("parcial_punto_3.csv"):
+        print("Archivo creado!")
 
 # 4) Permitir al usuario buscar un jugador por su nombre y mostrar sus logros, como
 # campeonatos de la NBA, participaciones en el All-Star y pertenencia al Salón de la
@@ -827,6 +834,9 @@ def rank_players(dream_team_list):
             #Using "+1" to show the actual positions
             file.write(f"{player_original['nombre']},{total_score_rank+1},{total_rebounds_rank+1},{total_assists_rank+1},{total_steals_rank+1}\n")
 
+    if os.path.isfile("parcial_punto_21.csv"):
+        print("Archivo creado!")
+
 # 22) BONUS- Encontrar y mostrar aquellos jugadores que hayan jugado igual mas cantidad de partidos All-Star 
 # que el numero ingresado por el usuario
 
@@ -975,6 +985,9 @@ def rank_players_by_field_goals_free_throw_triples_percentages(dream_team_list):
                 if player_original["nombre"] == sorted_by_triples[index]["nombre"]:
                     total_triples_rank = index
             file.write(f"{player_original['nombre']},{total_field_goals_rank+1},{total_free_throws_rank+1},{total_triples_rank+1}\n")
+    
+    if os.path.isfile("parcial_punto_24.csv"):
+        print("Archivo creado!")
 
 # 25) BONUS- Hallar y mostar la cantidad de jugadores cuya posicion sea "Ala-Pivot"
 
@@ -1212,6 +1225,268 @@ def check_amount_of_right_answers(amount_of_correct_answers):
         print("No ha obtenido la cantidad necesaria de respuestas correctas para obtener el certificado. Por favor siga intentandolo")
         return False
 
+# 30) EXTRA PARCIAL- Determinar la cantidad de jugadores que hay por cada posición.
+# Ejemplo:
+# Base: 2
+# Alero: 3
+
+def obtain_and_show_amount_of_players_by_positions(dream_team_list):
+    """
+    The function obtains and shows the amount of players in a dream team by their positions.
+    
+    :param dream_team_list: a list of dictionaries representing the players in a basketball team, where
+    each dictionary contains information about a player such as their name, position, and stats
+    :return: a dictionary with the count of players in each position in the input dream_team_list. The
+    keys of the dictionary are the positions "Escolta", "Ala-Pivot", "Aleros", "Pivot", and "Base", and
+    the values are the count of players in each position.
+    """
+    counters_dict={"Escolta": 0,"Ala-Pivot": 0,"Aleros": 0,"Pivot": 0,"Base": 0}
+    
+    for player in dream_team_list:
+        if player["posicion"] == "Escolta":
+            counters_dict["Escolta"] = counters_dict["Escolta"] + 1
+    
+    for player in dream_team_list:
+        if player["posicion"] == "Ala-Pivot":
+            counters_dict["Ala-Pivot"] = counters_dict["Ala-Pivot"] + 1
+
+    for player in dream_team_list:
+        if player["posicion"] == "Alero":
+            counters_dict["Aleros"] = counters_dict["Aleros"] + 1
+    
+    for player in dream_team_list:
+        if player["posicion"] == "Pivot":
+            counters_dict["Pivot"] = counters_dict["Pivot"] + 1
+
+    for player in dream_team_list:
+        if player["posicion"] == "Base":
+            counters_dict["Base"] = counters_dict["Base"] + 1
+    return counters_dict
+    
+# 31) Mostrar la lista de jugadores ordenadas por la cantidad de All-Star de forma descendente. La salida por pantalla debe tener un formato similar a este:
+# Michael Jordan (14 veces All Star)
+# Magic Johnson (12 veces All-Star)
+
+def find_amount_of_all_star_games_by_player(dream_team_list):
+    """
+    This function finds the amount of All-Star games played by each player in a given list of players'
+    achievements.
+    
+    :param dream_team_list: The dream_team_list is a list of dictionaries, where each dictionary
+    represents a player and their achievements. The dictionary has two keys: "nombre" (name) and
+    "logros" (achievements), where "logros" is a list of strings representing the player's achievements
+    :return: a list of dictionaries, where each dictionary contains the name of a player and the number
+    of All-Star games they played.
+    """
+    all_star_players = []
+
+    #Iterating on every player achievements, then looking for the word "All-Star" in them.
+    for player in dream_team_list:
+        for achievement in player["logros"]:
+            result_all_star = re.search("All-Star", achievement)
+            if result_all_star:
+                #If the player indeed played All-Star, then look for the numeric amount of games played. 
+                amount_of_all_star_played = re.search("^[0-9]+", achievement)
+                #Puting player's name and amount of All-Star games in the list
+                all_star_players.append({"Nombre":player["nombre"], "All-Stars":int(amount_of_all_star_played.group())})
+                #all_star_players.append({player["nombre"]:int(amount_of_all_star_played.group())})
+    return all_star_players
+
+def order_players_by_amount_of_all_star_games_played(list_all_stars):
+    """
+    This function orders a list of dictionaries containing information about players based on the number
+    of All-Star games they have played in, in descending order.
+    
+    :param list_all_stars: a list of dictionaries, where each dictionary represents a player and
+    contains information about the player's name and the number of All-Star games they have played
+    :return: a list of dictionaries containing information about players, sorted in descending order
+    based on the number of All-Star games they have played.
+    """
+    flag_swap = True
+    while(flag_swap):
+        flag_swap = False
+
+        for index_A in range(len(list_all_stars) - 1):
+                if list_all_stars[index_A]["All-Stars"] < list_all_stars[index_A+1]["All-Stars"]:
+                    list_all_stars[index_A],list_all_stars[index_A+1] = list_all_stars[index_A+1],list_all_stars[index_A]
+                    flag_swap = True
+
+    return list_all_stars
+
+# 32) Determinar qué jugador tiene las mejores estadísticas en cada valor. 
+# 33) Determinar qué jugador tiene las mejores estadísticas de todos.
+
+#Finding the top remaining players--------------------------------------------------------------------------------
+def show_top_total_score_player(dream_team_list):
+
+    flag_top_total_score_player = False
+    for player in dream_team_list:
+        if flag_top_total_score_player == False:
+            max_total_score_player_name = player["nombre"]
+            max_total_score = player["estadisticas"]["puntos_totales"]
+            flag_top_total_score_player = True
+        elif player["estadisticas"]["puntos_totales"] > max_total_score:
+            max_total_score_player_name = player["nombre"]
+            max_total_score = player["estadisticas"]["puntos_totales"]
+    return f"El jugador con mayor cantidad de puntos totales es: {max_total_score_player_name}"
+
+def show_top_avg_score_by_game_player(dream_team_list):
+
+    flag_top_avg_score_by_game_player = False
+    for player in dream_team_list:
+        if flag_top_avg_score_by_game_player == False:
+            max_avg_score_by_game_player_name = player["nombre"]
+            max_avg_score_by_game = player["estadisticas"]["promedio_puntos_por_partido"]
+            flag_top_avg_score_by_game_player = True
+        elif player["estadisticas"]["promedio_puntos_por_partido"] > max_avg_score_by_game:
+            max_avg_score_by_game_player_name = player["nombre"]
+            max_avg_score_by_game = player["estadisticas"]["promedio_puntos_por_partido"]
+    return f"El jugador con mayor promedio de puntos por partido es: {max_avg_score_by_game_player_name}"
+
+def show_top_avg_rebounds_by_game_player(dream_team_list):
+
+    flag_top_avg_rebounds_by_game_player = False
+    for player in dream_team_list:
+        if flag_top_avg_rebounds_by_game_player == False:
+            max_avg_rebounds_by_game_player_name = player["nombre"]
+            max_avg_rebounds_by_game = player["estadisticas"]["promedio_rebotes_por_partido"]
+            flag_top_avg_rebounds_by_game_player = True
+        elif player["estadisticas"]["promedio_rebotes_por_partido"] > max_avg_rebounds_by_game:
+            max_avg_rebounds_by_game_player_name = player["nombre"]
+            max_avg_rebounds_by_game = player["estadisticas"]["promedio_rebotes_por_partido"]
+    return f"El jugador con mayor promedio de rebotes por partido es: {max_avg_rebounds_by_game_player_name}"
+
+def show_top_avg_assist_by_game_player(dream_team_list):
+
+    flag_top_avg_assist_by_game_player = False
+    for player in dream_team_list:
+        if flag_top_avg_assist_by_game_player == False:
+            max_avg_assist_by_game_player_name = player["nombre"]
+            max_avg_assist_by_game = player["estadisticas"]["promedio_asistencias_por_partido"]
+            flag_top_avg_assist_by_game_player = True
+        elif player["estadisticas"]["promedio_asistencias_por_partido"] > max_avg_assist_by_game:
+            max_avg_assist_by_game_player_name = player["nombre"]
+            max_avg_assist_by_game = player["estadisticas"]["promedio_asistencias_por_partido"]
+    return f"El jugador con mayor promedio de asistencias por partido es: {max_avg_assist_by_game_player_name}"
+
+def show_top_percentage_field_goals_player(dream_team_list):
+
+    flag_top_percentage_field_goals_player = False
+    for player in dream_team_list:
+        if flag_top_percentage_field_goals_player == False:
+            max_percentage_field_goals_player_name = player["nombre"]
+            max_percentage_field_goals = player["estadisticas"]["porcentaje_tiros_de_campo"]
+            flag_top_percentage_field_goals_player = True
+        elif player["estadisticas"]["porcentaje_tiros_de_campo"] > max_percentage_field_goals:
+            max_percentage_field_goals_player_name = player["nombre"]
+            max_percentage_field_goals = player["estadisticas"]["porcentaje_tiros_de_campo"]
+    return f"El jugador con mayor porcentaje de tiro de campo es: {max_percentage_field_goals_player_name}"
+
+def show_top_percentage_free_throws_player(dream_team_list):
+
+    flag_top_percentage_free_throws_player = False
+    for player in dream_team_list:
+        if flag_top_percentage_free_throws_player == False:
+            max_percentage_free_throws_player_name = player["nombre"]
+            max_percentage_free_throws = player["estadisticas"]["porcentaje_tiros_libres"]
+            flag_top_percentage_free_throws_player = True
+        elif player["estadisticas"]["porcentaje_tiros_libres"] > max_percentage_free_throws:
+            max_percentage_free_throws_player_name = player["nombre"]
+            max_percentage_free_throws = player["estadisticas"]["porcentaje_tiros_libres"]
+    return f"El jugador con mayor porcentaje de tiros libres es: {max_percentage_free_throws_player_name}"
+
+def show_top_percentage_triples_player(dream_team_list):
+
+    flag_top_percentage_triples_player = False
+    for player in dream_team_list:
+        if flag_top_percentage_triples_player == False:
+            max_percentage_triples_player_name = player["nombre"]
+            max_percentage_triples = player["estadisticas"]["porcentaje_tiros_triples"]
+            flag_top_percentage_triples_player = True
+        elif player["estadisticas"]["porcentaje_tiros_triples"] > max_percentage_triples:
+            max_percentage_triples_player_name = player["nombre"]
+            max_percentage_triples = player["estadisticas"]["porcentaje_tiros_triples"]
+    return f"El jugador con mayor porcentaje de triples es: {max_percentage_triples_player_name}"
+
+#-------------------------32 & 33-------------------------------
+
+def update_counter(players_counter, player_name):
+    for key in players_counter.keys():
+        if key == player_name:
+            players_counter[key] += 1
+
+def establish_best_player_by_stadistics(dream_team_list):
+    players_counter = {"Michael Jordan":0,
+                       "Magic Johnson":0,
+                       "Larry Bird":0,
+                       "Charles Barkley":0,
+                       "Scottie Pippen":0,
+                       "David Robinson":0,
+                       "Patrick Ewing":0,
+                       "Karl Malone":0,
+                       "John Stockton":0,
+                       "Clyde Drexler":0,
+                       "Chris Mullin":0,
+                       "Christian Laettner":0}
+    
+    list_of_functions = [
+        calculate_and_show_player_with_highest_amount_of_seasons,
+        show_top_total_score_player,
+        show_top_avg_score_by_game_player,
+        show_top_rebound_player,
+        show_top_avg_rebounds_by_game_player,
+        show_top_assist_player,
+        show_top_avg_assist_by_game_player,
+        show_top_steal_player,
+        show_top_block_player,
+        show_top_percentage_field_goals_player,
+        show_top_percentage_free_throws_player,
+        show_top_percentage_triples_player
+    ]
+
+    for function in list_of_functions:
+        result = function(dream_team_list)
+        player_name = re.search("es: ([a-zA-Z ]+)$", result).group(1)
+        update_counter(players_counter, player_name)
+
+    return players_counter
+    
+def get_best_player_for_every_stadistics_item(dream_team_list):
+    best_players_string = []
+
+    stat_functions = [
+        calculate_and_show_player_with_highest_amount_of_seasons,
+        show_top_total_score_player,
+        show_top_avg_score_by_game_player,
+        show_top_rebound_player,
+        show_top_avg_rebounds_by_game_player,
+        show_top_assist_player,
+        show_top_avg_assist_by_game_player,
+        show_top_steal_player,
+        show_top_block_player,
+        show_top_percentage_field_goals_player,
+        show_top_percentage_free_throws_player,
+        show_top_percentage_triples_player
+    ]
+
+    for func in stat_functions:
+        result = func(dream_team_list)
+        best_players_string.append(result)
+
+    return best_players_string
+
+def find_out_best_player_by_stadistics(player_counter_dict):
+    flag_top_player = False
+    for key, value in player_counter_dict.items():
+        if flag_top_player == False:
+            max_top_player_name = key
+            max_top_player = value
+            flag_top_player = True
+        elif value > max_top_player:
+            max_top_player_name = key
+            max_top_player = value
+    return f"El jugador con las mejores estadisticas es {max_top_player_name}"
+
 #------------------------------------------------APP---------------------------------------------------------------
 
 def dream_team_app(dream_team_list):
@@ -1405,6 +1680,20 @@ def dream_team_app(dream_team_list):
                 else:
                     print("Para obtener el certificado primero debe elegir la opcion 28 y responder 2 o mas preguntas correctamente")
             case 30:
+                function_dictionary = obtain_and_show_amount_of_players_by_positions(dream_team_list_duplicate)
+                for key, value in function_dictionary.items(): 
+                    print(f"{key}:{value}")
+            case 31:
+                sorted_all_star_players_list = order_players_by_amount_of_all_star_games_played(find_amount_of_all_star_games_by_player(dream_team_list_duplicate))
+                for item in sorted_all_star_players_list:
+                    print(f"{item['Nombre']} ({item['All-Stars']} veces All-Star)")
+            case 32:
+                string_list = get_best_player_for_every_stadistics_item(dream_team_list_duplicate)
+                for string in string_list:
+                    print(string)
+            case 33:
+                print(find_out_best_player_by_stadistics(establish_best_player_by_stadistics(dream_team_list_duplicate)))
+            case 34:
                 os.system('cls')
                 break
             case _:
